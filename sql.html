@@ -1,0 +1,71 @@
+<html>
+<body>
+    <div style="display: flex; justify-content: space-between; padding:0 50px;">
+        <div style="display: flex; flex-direction: column; flex-grow: 0;align-items:center; width: 50%;">
+            <textarea id="textarea" placeholder="please input your data in this area" cols="150" rows="25" style="width: 100%; padding: 10px; font-size: 16px;"></textarea>
+            <select id="select" style="width:200px; height: 30px; margin: 10px;">
+                <option value="number" selected="selected">number</option>
+                <option value="string">string</option>
+            </select>
+            <div>
+                    <button id="clean" style="width: 100px;height:40px;margin: 50px 5px;">clean</button>
+                    <button id="submit" style="width: 100px;height:40px;margin: 50px 5px;">submit</button>
+            </div>
+            
+        </div>
+        <div style="width: 40%; padding: 20px; border: 1px grey solid">
+            <p id ="result" style="margin:0;">result:</p>
+        </div>
+    </div>
+
+<script>
+    var textarea = document.getElementById('textarea');
+    var submit = document.getElementById('submit');
+    var select = document.getElementById('select');
+    var result = document.getElementById('result');
+    var clean = document.getElementById('clean');
+
+    submit.onclick = function(){
+        var textarea_value = textarea.value;
+        var select_value = select.value;
+
+        var textarea_arr=textarea_value.split('\n');
+        var result_str='';
+
+        if(select_value ==='number'){
+            result_str = transNumber(textarea_arr);
+        }
+        else if(select_value ==='string'){
+            result_str = transString(textarea_arr);
+        }
+        
+        result.innerHTML = result_str;
+    }
+
+    function transNumber(arr){
+        var s='';
+        for(var i=0; i<arr.length-1; i++){
+            s=s+arr[i].trim()+","+"\n";
+        }
+        s=s+arr[i].trim();
+        return s;
+    }
+
+    function transString(arr){
+        var s='';
+        for(var i=0; i<arr.length-1; i++){
+            s=s+'"'+arr[i].trim()+'",'+"\n";
+        }
+        s=s+'"'+arr[i].trim()+'"';
+        return s;
+    }
+
+    clean.onclick=function(){
+        textarea.value = '';
+    }
+
+</script>
+</body>
+</html>
+
+
